@@ -1,9 +1,5 @@
-# Google AdSense
+# Google AdSense Responsive Ads
 > Google AdSense integration for Nuxt.js. Advertisements will update whenever the page route changes
-
-## Setup
-- Add `@nuxtjs/google-adsense` dependency using yarn or npm to your project
-- Add `@nuxtjs/google-adsense` to `modules` section of `nuxt.config.js`
 
 ```js
 {
@@ -30,8 +26,9 @@ Using top level options:
 }
 ```
 
-The asynchronous ad code (`//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js`) is automatically
-added to the `<head>` section of your pages.
+If the option headScript is set to true, the asynchronous ad code (`//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js`) is automatically
+added to the `<head>` section of your pages. Personally I had had some problems with this, because
+the code was not found in google's page check. Should work if your site has been approved for adsense though.
 
 
 ## Configuration options
@@ -39,11 +36,8 @@ added to the `<head>` section of your pages.
 | Option | type |  description
 | -------- | ---- | -----------
 | `id` | String | Your Google Adsense Publihser client ID (i.e. `ca-pub-#########`). **Required** when not in test mode.
-| `pageLevelAds` | Boolean | Enable Adsense Page Level Ads. Default is `false`. Refer to the AdSense docs for details.
-| `tag` | String | AdSense component tag name. Defaults to `adsbygoogle`.
 | `includeQuery` | Boolean | When `false`, only `$route.path` is checked for changes. If set to `true` `$route.query` will also be taken into account. The default is `false`.
-| `analyticsUacct` | String | Google Analytics Account ID (if linking analytics with AdSense, i.e. `UA-#######-#`).
-| `analyticsDomainName` | String | Google Analytics Account Domain (if linking analytics with AdSense, i.e. `example.com`).
+| `headScript` | Boolean | Automatically add Adsense script to `<head>` section of your page.
 | `test` | Boolean | Force AdSense into _test_ mode (see below).
 
 ### Test mode
@@ -76,13 +70,8 @@ Use the `ad-slot` property to specify your google adsense ad slot value (specifi
 | `ad-slot` | String | Google Adsense adslot. **This prop is required when not in test mode**. Refer to your AdSense account for ad-slot values.
 | `ad-format` | String | Defaults to `'auto'`. Refer to the adsense docs for other options
 | `ad-style` | Object | Styles to apply to the rendered `<ins>` element. Default: `{ display: 'block' }`. Refer to VueJS [style binding docs](https://vuejs.org/v2/guide/class-and-style.html#Object-Syntax-1) for the Object format.
-| `ad-layout` | String | Optional. Refer to the adsense docs
-| `ad-layout-key` | String | Optional. Refer to the adsense docs
-| `page-url` | String | Optional.  Set a reference page URL (of similar content) if the ad is on a page that requires authentication. When set, this prop must be a fully qualified URL (inclcuding protocol and hostname).
+| `full-width-responsive` | Boolean | Defaults to `'true'`. Refer to the adsense docs
 | `include-query` | Boolean | Override global option `includeQuery` on a per ad basis. Ensure all ads on a page have the same setting.
-| `analytics-uacct` | String | Google Analytics Account ID (if linking analytics with AdSense, i.e. `UA-#######-#`). Defaults to the value specified in the plugin option `analyticsUacct`.
-| `analytics-domain-name` | String | Google Analytics Account domain (if linking analytics with AdSense, i.e. `example.com`). Defaults to the value specified in the plugin option `analyticsDomainName`.
-
 
 ## Automatic updating of Ads
 Whenever your route changes, any disaplayed ads will update, just as they would on normal
